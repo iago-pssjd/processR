@@ -79,6 +79,33 @@ modmedSummary=function(semfit,mod=NULL,values=NULL,boot.ci.type="perc",add.range
     # se=res$se[selected]
     directp=res$p[selected4]
 
+    selected5=which(str_detect(res$lhs, "total"))
+    selected5
+    if(length(values1)==2){
+      selected7=selected5[str_detect(res$lhs[selected5], "above|below")]
+    } else{
+      selected7=selected5
+    }
+  selected7
+  total=res$est[selected7]
+  lowert=res$ci.lower[selected7]
+  uppert=res$ci.upper[selected7]
+  totalp=res$pvalue[selected7]
+  
+  selected6=which(str_detect(res$lhs, "mediated"))
+  selected6
+    if(length(values1)==2){
+      selected8=selected6[str_detect(res$lhs[selected6], "above|below")]
+    } else{
+      selected8=selected6
+    }
+   selected8
+  prop.mediated=res$est[selected8]
+  lowerp=res$ci.lower[selected8]
+  upperp=res$ci.upper[selected8]
+  prop.mediatedp=res$pvalue[selected8]
+  
+  
     indirect
     lower
     direct
@@ -86,7 +113,7 @@ modmedSummary=function(semfit,mod=NULL,values=NULL,boot.ci.type="perc",add.range
     if(length(values)==2){
         values=rep(values,length(indirect)/length(values))
     }
-    df=data.frame(values=as.numeric(values1),indirect,lower,upper,indirectp,direct,lowerd,upperd,directp)
+    df=data.frame(values=as.numeric(values1),indirect,lower,upper,indirectp,direct,lowerd,upperd,directp,total,lowert,uppert,totalp,prop.mediated,lowerp,upperp,prop.mediatedp)
     df
     nrow(df)
 
